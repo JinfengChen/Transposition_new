@@ -113,20 +113,25 @@ def main():
 
     #RIL275_RelocaTEi/RelocaTEi_GN1/repeat/results/ALL.all_nonref_insert.gff 
     data    = defaultdict(lambda : list())
-    output0 = '%s.CombinedGFF.characterized.gff' %(args.input)
-    output1 = '%s.CombinedGFF.ALL.gff' %(args.input)
-    ofile0  = open(output0, 'w')
-    ofile1  = open(output1, 'w')
+    #output0 = '%s.CombinedGFF.characterized.gff' %(args.input)
+    #output1 = '%s.CombinedGFF.ALL.gff' %(args.input)
+    output2 = '%s.CombinedGFF.Shared.gff' %(args.input)
+    #ofile0  = open(output0, 'w')
+    #ofile1  = open(output1, 'w')
+    ofile2  = open(output2, 'w')
     dirs    = glob.glob('%s/*_RelocaTEi' %(args.input))
     for d in dirs:
         ril    = re.split(r'\_', os.path.split(d)[1])[0]
         ril_id = re.sub(r'\D+', '', ril)
         gff       = '%s/repeat/results/ALL.all_nonref_insert.gff' %(d)
         gff_class = '%s/repeat/results/ALL.all_nonref_insert.characTErized.gff' %(d)
-        parse_gff(gff, ril_id, ofile1)
-        parse_gff(gff_class, ril_id, ofile0)
-    ofile0.close()
-    ofile0.close()
+        gff_shared  = '%s/repeat/results/ALL.all_ref_insert.no_ping_pong.gff' %(d)
+        #parse_gff(gff, ril_id, ofile1)
+        #parse_gff(gff_class, ril_id, ofile0)
+        parse_gff(gff_shared, ril_id, ofile2)
+    #ofile0.close()
+    #ofile1.close()
+    ofile2.close()
 
 if __name__ == '__main__':
     main()
